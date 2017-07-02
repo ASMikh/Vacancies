@@ -1,0 +1,44 @@
+.vacancies
+{
+   background: #dad3cb;  
+   margin-left: 15px;
+   margin-bottom:10px;
+   display: block;
+   width: 800px;
+   min-height: 210px;
+   padding:10px;  
+   border-radius: 10px;
+}
+.vacancies div
+{
+ border-radius: 10px;
+}
+#Descriptions
+{
+	/*background:#FFFFFF;*/
+	min-height:100px;
+}
+#Name h4{  
+    background: #a8c4c0;
+    background: -moz-linear-gradient(top,  #a8c4c0 0%, #7aa5a2 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#a8c4c0), color-stop(100%,#7aa5a2));
+    background: -webkit-linear-gradient(top,  #a8c4c0 0%,#7aa5a2 100%);
+    background: -o-linear-gradient(top,  #a8c4c0 0%,#7aa5a2 100%);
+    background: -ms-linear-gradient(top,  #a8c4c0 0%,#7aa5a2 100%);
+    background: linear-gradient(top,  #a8c4c0 0%,#7aa5a2 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a8c4c0', endColorstr='#7aa5a2',GradientType=0 );
+    font-size: 20px;
+    font-weight: bold;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+    padding: 0 20px;  
+    line-height: 50px;
+    height: 50px;
+    margin-top: 5px; 
+    margin-left: -35px;  
+     position: relative;  
+    box-shadow: 0px 3px 4px 0px rgba(0,0,0,0.3);
+    -moz-box-shadow: 0px 3px 4px 0px rgba(0,0,0,0.3);
+    -webkit-box-shadow: 0px 3px 4px 0px rgba(0,0,0,0.3);
+    color: #3b3a3b;  
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.4);  
+}  
