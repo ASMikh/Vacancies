@@ -30,13 +30,40 @@
 	       if (data.items[n].snippet != null)
 	        {
 	   	     if (data.items[n].snippet["responsibility"] != null ) description=data.items[n].snippet["responsibility"] ; else description=null;
-	        }
-	        else description=null;
+			}
             $('.list').append('<div class="vacancies" id="vacancy'+n+'"></div>');
             $('#vacancy'+n).append('<div id="Name"><span class="horiz-flag noise"><h4>'+name+'</span></h4></div>');
-            $('#vacancy'+n).append('<div id="Descriptions"><div id="Salary">Зарплата: '+minsalary+'-'+maxsalary+'<div><div id="Company">Компания: '+companyname+'</div><div id="Description">Обязанности: '+description+'</div></div>');
+            $('#vacancy'+n).append('<div id="Descriptions"><div id="Salary">Зарплата: <b id=SalaryMin>'+minsalary+'</b>-<b id=SalaryMax>'+maxsalary+'</b><div><div id="Company">Компания: '+companyname+'</div><div id="Description">Обязанности: '+description+'</div></div>');
            }
         });
     });
 
+}
+function FindbyWords()
+{
+$(function()
+{
+ console.log("start found");
+//$('div.vacancies ').css('display', 'none');
+//console.log($('#keywords').val());
+//$('div.vacancies:contains("' + $('#keywords').val() + '")').css('display', 'block');
+//console.log($( "div.vacancies" ).find("#SalaryMin").html());
+//$( "div.vacancies" )
+//    .hide()
+//    .filter(function(elem){
+//		//console.log("start");
+//		console.log($(this).find("#SalaryMin").html());
+//      return parseInt($(this).find("#SalaryMin").html())>= $('#minsalary').val()  && parseInt($(this).find("#SalaryMax").html())<= $('#maxsalary').val();
+//    })
+//    .show();
+	$('div.vacancies ').hide()
+	$('div.vacancies:contains("' + $('#keywords').val() + '")')
+    .filter(function(elem){
+		//console.log("start");
+		console.log($(this).find("#SalaryMin").html());
+        return parseInt($(this).find("#SalaryMin").html())>= $('#minsalary').val()  && parseInt($(this).find("#SalaryMax").html())<= $('#maxsalary').val();
+    })
+    .show();
+
+});
 }

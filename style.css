@@ -1,10 +1,45 @@
+.container {
+margin: 0px auto;
+width: 1000px;
+height: 1000px;
+}
+#header {
+background: #838283;
+height: 200px;
+width: 1000px;
+}
+#found
+{
+   width:340px;
+   float:right;
+ 
+}
+.list
+{
+	width:620px;
+	float:left;
+}
 .vacancies
 {
    background: #dad3cb;  
    margin-left: 15px;
    margin-bottom:10px;
    display: block;
-   width: 800px;
+   width: 620px;
+   min-height: 210px;
+   padding:10px;  
+   border-radius: 10px;
+   float:left;
+}
+
+
+.find
+{
+   background: #dad3cb;  
+   margin-left: 15px;
+   margin-bottom:10px;
+   display: block;
+   width: 320px;
    min-height: 210px;
    padding:10px;  
    border-radius: 10px;
@@ -42,3 +77,126 @@
     color: #3b3a3b;  
     text-shadow: 0 1px 0 rgba(255, 255, 255, 0.4);  
 }  
+/* Стили для кнопки отправить */
+#btn {
+    width: 138px;
+    height: 44px;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    border-radius: 4px;
+    float:right;
+    border: 1px solid #253737;
+    background: #416b68;
+    background: -webkit-gradient(linear, left top, left bottom, from(#6da5a3), to(#416b68));
+    background: -webkit-linear-gradient(top, #6da5a3, #416b68);
+    background: -moz-linear-gradient(top, #6da5a3, #416b68);
+    background: -ms-linear-gradient(top, #6da5a3, #416b68);
+    background: -o-linear-gradient(top, #6da5a3, #416b68);
+    background-image: -ms-linear-gradient(top, #6da5a3 0%, #416b68 100%);
+    padding: 10.5px 21px;
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    border-radius: 6px;
+    -webkit-box-shadow: rgba(255,255,255,0.1) 0 1px 0, inset rgba(255,255,255,0.7) 0 1px 0;
+    -moz-box-shadow: rgba(255,255,255,0.1) 0 1px 0, inset rgba(255,255,255,0.7) 0 1px 0;
+    box-shadow: rgba(255,255,255,0.1) 0 1px 0, inset rgba(255,255,255,0.7) 0 1px 0;
+    text-shadow: #333333 0 1px 0;
+    color: #e1e1e1;
+}
+#btn:hover {
+    border: 1px solid #253737;
+    text-shadow: #333333 0 1px 0;
+    background: #416b68;
+    background: -webkit-gradient(linear, left top, left bottom, from(#77b2b0), to(#416b68));
+    background: -webkit-linear-gradient(top, #77b2b0, #416b68);
+    background: -moz-linear-gradient(top, #77b2b0, #416b68);
+    background: -ms-linear-gradient(top, #77b2b0, #416b68);
+    background: -o-linear-gradient(top, #77b2b0, #416b68);
+    background-image: -ms-linear-gradient(top, #77b2b0 0%, #416b68 100%);
+    color: #fff;
+ }
+#btn:active {
+    margin-top:1px;
+    text-shadow: #333333 0 -1px 0;
+    border: 1px solid #333333;
+    background: #ffCC00;
+    background: -webkit-gradient(linear, left top, left bottom, from(#ffCC00), to(#ff6600));
+    background: -webkit-linear-gradient(top, #ffcc00, #ff6600);
+    background: -moz-linear-gradient(top, #ffcc00, #ff6600);
+    background: -ms-linear-gradient(top, #ffcc00, #ff6600);
+    background: -o-linear-gradient(top, #ffcc00, #ff6600);
+    background-image: -ms-linear-gradient(top, #ffcc00 0%, #ff6600 100%);
+    color: #fff;
+    -webkit-box-shadow: rgba(255,255,255,0) 0 1px 0, inset rgba(255,255,255,0.7) 0 1px 0;
+    -moz-box-shadow: rgba(255,255,255,0) 0 1px 0, inset rgba(255,255,255,0.7) 0 1px 0;
+    box-shadow: rgba(255,255,255,0) 0 1px 0, inset rgba(255,255,255,0.7) 0 1px 0;
+    outline: none;
+}
+/* Базовый стиль формы */
+#form {
+	width: 290px;
+	padding: 24px 24px 0;
+	background: #FEFEFE;
+  	border: 1px solid #CAD8DE;
+	border-radius: 4px;
+	box-shadow: 0 1px 2px rgba(0,0,0,0.08);
+	font: 14px/18px Arial, Tahoma, sans-serif;
+	color: #444;
+}
+#form .pole {
+	margin: 0 0 18px;
+}	
+#form .pole label {
+	display: block;
+	margin: 0 0 11px;
+}
+#form .pole .input {
+  	border-radius: 4px;
+}
+#form .pole input {
+  	font: 12px Arial, Tahoma, sans-serif;
+	color: #444;
+	width: 262px;
+	padding: 9px 13px;
+  	border: 1px solid #D2D9DC;
+	border-radius: 3px;
+	box-shadow: inset 2px 2px 6px #EBEBEB, 0 0 0 5px #F7F9FA;
+	outline: none;
+}
+#form .pole input:focus {
+	border-color: #B7D4EA;
+	box-shadow: inset 2px 2px 6px #EBEBEB, 0 0 4px #D0E6F6, 0 0 0 5px #F2F8FC;
+}
+#form .sub {
+	overflow: hidden;
+	margin: 30px -24px 0;
+	padding: 22px 24px;
+	background: #F0F5F7;
+	border-top: 1px solid #DDE0E8;
+	border-radius: 0 0 4px 4px;
+	box-shadow: inset 0 1px #FFF, inset -1px -1px #F7FAFB, inset 1px 0 #F7FAFB;
+  	font-size: 11px;
+}
+#form .sub button {
+	float: right;
+	padding: 6px 20px;
+	height: 30px;
+  	border-top: 1px solid #98CCE7;
+  	border-bottom: 1px solid #7DB0CC;
+  	border-left: 1px solid #8CBFD9;
+  	border-right: 1px solid #8CBFD9;
+  	border-radius: 15px;
+	color: #FFF;
+  	font: bold 13px Arial, Tahoma, sans-serif;
+	box-shadow: inset 0 1px #D4EBF7, 0 1px 3px #B8BEBE;
+	background: -moz-linear-gradient(top,  #badff3 0%, #7acbed 100%);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#badff3), color-stop(100%,#7acbed));
+	background: -webkit-linear-gradient(top,  #badff3 0%,#7acbed 100%);
+	background: -o-linear-gradient(top,  #badff3 0%,#7acbed 100%);
+	background: -ms-linear-gradient(top,  #badff3 0%,#7acbed 100%);
+	background: linear-gradient(top,  #badff3 0%,#7acbed 100%);
+	background-color: #9FD7F0;
+	cursor: pointer;
+	text-shadow: 0 -1px rgba(0,0,0,0.15);
+	outline: none;
+}

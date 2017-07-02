@@ -13,9 +13,37 @@
 <link rel="stylesheet" type="text/css" href="style.css" />
 </head>
 <body>
+<div class="container">
+<div id="header">Шапка сайта </div>
+<div id="found">
+<form id="form" method="post">
+	<div class="pole">
+		<label>Минимальная зарплата:</label>
+		<div class="input"><input type="number" id="minsalary" placeholder="Введите минимальную зарплату" ></div>
+	</div>
+
+	<div class="pole" >
+	    <label>Максимальная зарплата:</label>
+		<div class="input"><input type="number" id="maxsalary" placeholder="Введите максимальную зарплату" ></div>
+	</div>
+	
+	<div class="pole" >
+	    <label>По фразе:</label>
+		<div class="input"><input type="text" id="keywords" placeholder="Введите фразу для поиска"  ></div>
+	</div>
+
+	<div class="sub">
+		<button type="button" onclick="FindbyWords();">Поиск</button>
+	</div>
+</form>
+</div>
 <div class="list"></div>
+</div>
 <script>
-getdata();
+$(document).ready(function() 
+{
+  getdata();
+});
 </script>
 </body>
 </html>
