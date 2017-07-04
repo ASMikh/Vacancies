@@ -5,16 +5,21 @@
   <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
   <![endif]-->
   <meta charset="utf-8" />
-  <title>Инвесторы видят перспективу</title>
+  <title>Тестовое задание</title>
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<script src="jQuery.paginate.min.js"></script>
 <script src="https://code.highcharts.com/highcharts.js"></script>
 <script src="https://code.highcharts.com/modules/data.js"></script>
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAD0Q4OQZGUKvXAlNdPqn6Nblvxu1oL-Bk"></script>
+
 <script src="index.js"></script> 
 <link rel="stylesheet" type="text/css" href="style.css" />
 </head>
 <body>
-<div class="container">
-<div id="header">Шапка сайта </div>
+<div class="container" id="contain">
+<div id="header"><img src="test.jpg" alt="Поиск работы" width=500px height=200px /><img src="test22.jpg" alt="Поиск работы" width=500px height=200px /> </div>
+<section id="visualisation"><div id="map" class="map"></div><div id="chart"></div></section >
+<div class="contain" id="contain" >
 <div id="found">
 <form id="form" method="post">
 	<div class="pole">
@@ -37,13 +42,107 @@
 	</div>
 </form>
 </div>
-<div class="list"></div>
+<div class="list" id="list">
+ <div class="holder"></div>
 </div>
+<div style="clear: both;"></div>
+</div>
+<footer>
+    <p>&copy; 2017 Alexander Mikheev.</p>
+</footer>
 <script>
 $(document).ready(function() 
 {
   getdata();
+   $(function() {
+    /* initiate plugin */
+    $(".list div.holder").jPages({
+        containerID: "list"
+    });
 });
+});
+</script>
+ <script>
+  
+function initMap() {
+    var centerLatLng = new google.maps.LatLng(54.507014, 36.252277);
+    var mapOptions = {
+        center: centerLatLng,
+        zoom: 10
+    };
+  
+    map = new google.maps.Map(document.getElementById("map"), mapOptions);
+  
+    // Создаем объект информационного окна и помещаем его в переменную infoWindow
+    // Так как у каждого информационного окна свое содержимое, то создаем пустой объект, без передачи ему параметра content
+    infoWindow = new google.maps.InfoWindow();
+  
+    // Отслеживаем клик в любом месте карты
+    google.maps.event.addListener(map, "click", function() {
+        // infoWindow.close - закрываем информационное окно.
+        infoWindow.close();
+    });
+    var x=0;
+    // Перебираем в цикле все координата хранящиеся в markersData
+    for (var i = 0; i < positiveArr.length; i++){
+        if (positiveArr[i].slice(5,6)[0]!=null && positiveArr[i].slice(6,7)[0]!=null)
+		{
+          var latLng = new google.maps.LatLng(positiveArr[i].slice(5,6)[0], positiveArr[i].slice(6,7)[0]);
+          var name = positiveArr[i].slice(0,1)[0];
+          var description =positiveArr[i].slice(3,4)[0];
+		  //console.log(positiveArr[i].slice(0,1)[0]);
+          x++;
+		  //console.log(positiveArr[i].slice(5,6)[0],positiveArr[i].slice(6,7)[0]);
+          // Добавляем маркер с информационным окном
+          addMarker(latLng, name, description);
+		}
+    }
+	console.log(x+"markers");
+  
+}
+google.maps.event.addDomListener(window, "load", initMap);
+  
+// Функция добавления маркера с информационным окном
+function addMarker(latLng, name, description) {
+    var marker = new google.maps.Marker({
+        position: latLng,
+        map: map,
+        title: name
+    });
+  
+    // Отслеживаем клик по нашему маркеру
+    google.maps.event.addListener(marker, "click", function() {
+        //надо сделать получение нескольких вакансий в одной точке!!
+		//console.log(latLng.lat(),lng());
+		var contentString = '<div class="infowindow">';
+		for(var i=0;i<positiveArr.length;i++)
+		{
+		//console.log(i);
+		  //console.log(arr[i].slice(5,6)[0]+"/"+latLng.lat().toFixed(6)+"/"+arr[i].slice(6,7)[0]+"/"+latLng.lng().toFixed(6));
+		 if (positiveArr[i].slice(5,6)[0]==latLng.lat().toFixed(6) && positiveArr[i].slice(6,7)[0]==latLng.lng().toFixed(6))
+		 {
+		 // console.log("совпало");
+		 // console.log(arr[i].slice(5,6)[0]+"/"+latLng.lat().toFixed(6)+"/"+arr[i].slice(6,7)[0]+"/"+latLng.lng().toFixed(6));
+	      contentString+='<h3>' + positiveArr[i].slice(0,1)[0] + '</h3>' + '<p>' + positiveArr[i].slice(3,4)[0] + '</p>';
+		 }
+		}
+		contentString+='</div>'
+        // contentString - это переменная в которой хранится содержимое информационного окна.
+        //var contentString = '<div class="infowindow">' +
+        //                        '<h3>' + name + '</h3>' +
+        //                        '<p>' + description + '</p>' +
+        //                   '</div>';
+        // console.log(contentString);
+        // Меняем содержимое информационного окна
+        infoWindow.setContent(contentString);
+  
+        // Показываем информационное окно
+        infoWindow.open(map, marker);
+  
+    });
+}
+    </script>
+
 </script>
 </body>
 </html>
