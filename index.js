@@ -110,23 +110,23 @@ $(function()
 {
     console.log("start found");
 	$('div.vacancies ').hide()
-	$('div.vacancies:contains("' + $('#keywords').val() + '")')
-    .filter(function(elem){
-		var bool3=false;
-		if($('#minsalary').val().length>0)
-		{
-		if (parseInt($(this).find("#SalaryMin").html())>= $('#minsalary').val()) bool3=true; else bool3=false;
-		}
-		else  bool3=true;
-		var bool4=false;
-		if($('#maxsalary').val().length>0)
-		{
-		if (parseInt($(this).find("#SalaryMax").html())<= $('#maxsalary').val()) bool4=true; else bool4=false;	
-		} 
-		else  bool4=true;
-        return bool3 && bool4;
-    })
-    .show();
+	//$('div.vacancies:contains("' + $('#keywords').val() + '")')
+   /// .filter(function(elem){
+	//	var bool3=false;
+	//	if($('#minsalary').val().length>0)
+	//	{
+	//	if (parseInt($(this).find("#SalaryMin").html())>= $('#minsalary').val()) bool3=true; else bool3=false;
+	//	}
+	//	else  bool3=true;
+	//	var bool4=false;
+	//	if($('#maxsalary').val().length>0)
+	//	{
+	//	if (parseInt($(this).find("#SalaryMax").html())<= $('#maxsalary').val()) bool4=true; else bool4=false;	
+	//	} 
+	//	else  bool4=true;
+   //     return bool3 && bool4;
+   // })
+  //  .show();
 	positiveArr = arr.filter(function(number) {
 		var bool=false;
 		if (($('#keywords').val()=='Зарплата') ||($('#keywords').val()=='Компания') || ($('#keywords').val()=='Обязанности')|| $('#keywords').val().length==0) bool=true;
@@ -159,8 +159,13 @@ $(function()
     var named=[];
     var minrub=[];
     var maxrub=[];
+	//удаляем содержимое .list и строим новое
+	$("div.list").empty()
     for(var i=0;i<positiveArr.length;i++)
 	{
+     $('.list').append('<div class="vacancies" id="vacancy'+i+'"></div>');
+     $('#vacancy'+i).append('<div id="Name"><span class="horiz-flag noise"><h4>'+positiveArr[i].slice(0,1)+'</span></h4></div>');
+     $('#vacancy'+i).append('<div id="Descriptions"><div id="Salary">Зарплата: <b id=SalaryMin>'+positiveArr[i].slice(1,2)+'</b>-<b id=SalaryMax>'+positiveArr[i].slice(2,3)+'</b><div><div id="Company">Компания: '+positiveArr[i].slice(3,4)+'</div><div id="Description">Обязанности: '+positiveArr[i].slice(4,5)+'</div></div>');
 		console.log(positiveArr.length);
 	named.push(positiveArr[i].slice(0,1));
 	minrub.push(positiveArr[i].slice(1,2));
