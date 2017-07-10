@@ -40,6 +40,16 @@
 		<button type="button" onclick="FindbyWords();">Поиск</button>
 	</div>
 </form>
+ <!-- ССЫЛКА НА ОКНО -->
+ <button type="button" class="buttonnavigation"  onclick="this.nextElementSibling.style.display='block';">Помощь</button>
+ <!-- ОКНО -->
+ <div id="parent_popup_click1" class="parent_popup_click">
+  <div class="popup_click">
+   <h2>Для поиска интересующих вакансий:</h2>
+    <p><center><img src="help.png" alt="помощь" width=600px height=440px></center>
+    <a class="close" title="Закрыть" onclick="document.getElementById('parent_popup_click1').style.display='none';">X</a>
+ </div>
+ </div>
 </div>
 <div class="list" id="list">
  <div class="holder"></div>
@@ -49,7 +59,6 @@
  <button type="button" class="buttonnavigation" id="prev" onclick="prevlist()">Предыдущая страница</button>
  <span id="index2" align="center">1</span>
  <button type="button" class="buttonnavigation" id="next" onclick="nextlist();">Следующая страница</button>
-
 </div>
 </div>
 <footer>
