@@ -7,7 +7,6 @@ padding:10px;
 }
 .contain{
 margin: 0px auto;
-width: 1000px;
 background:white;
 }
 
@@ -37,11 +36,11 @@ width: 1000px;
 .vacancies
 {
    background: #F0F5F7;  
-   margin-left: 15px;
-   margin-bottom:10px;
+   /*margin-left: 15px;*/
+   //margin-bottom:10px;
    display: block;
    width: 620px;
-   min-height: 210px;
+   min-height: 180px;
    padding:10px;  
    border-radius: 10px;
    float:left;
@@ -64,13 +63,13 @@ width: 1000px;
 #Descriptions
 {
 	/*background:#FFFFFF;*/
-	min-height:100px;
+	min-height:50px;
 }
 #Name h4{  
     background: #a8c4c0;
     background: -moz-linear-gradient(top,  #a8c4c0 0%, #7aa5a2 100%);
     background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#a8c4c0), color-stop(100%,#7aa5a2));
-    background: -webkit-linear-gradient(top,  #a8c4c0 0%,#7aa5a2 100%);
+   
     background: -o-linear-gradient(top,  #a8c4c0 0%,#7aa5a2 100%);
     background: -ms-linear-gradient(top,  #a8c4c0 0%,#7aa5a2 100%);
     background: linear-gradient(top,  #a8c4c0 0%,#7aa5a2 100%);
@@ -190,6 +189,39 @@ width: 1000px;
 	box-shadow: inset 0 1px #FFF, inset -1px -1px #F7FAFB, inset 1px 0 #F7FAFB;
   	font-size: 11px;
 }
+#found .help {
+	overflow: hidden;
+	padding: 22px 24px;
+	background: #F0F5F7;
+	border: 1px solid #CAD8DE;
+	border-top: 1px solid #DDE0E8;
+	border-radius: 0 0 4px 4px;
+	box-shadow: inset 0 1px #FFF, inset -1px -1px #F7FAFB, inset 1px 0 #F7FAFB;
+  	font-size: 11px;
+}
+#found .help button {
+	float: right;
+	padding: 6px 20px;
+	height: 30px;
+  	border-top: 1px solid #98CCE7;
+  	border-bottom: 1px solid #7DB0CC;
+  	border-left: 1px solid #8CBFD9;
+  	border-right: 1px solid #8CBFD9;
+  	border-radius: 15px;
+	color: #FFF;
+  	font: bold 13px Arial, Tahoma, sans-serif;
+	box-shadow: inset 0 1px #D4EBF7, 0 1px 3px #B8BEBE;
+	background: -moz-linear-gradient(top,  #badff3 0%, #7acbed 100%);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#badff3), color-stop(100%,#7acbed));
+	background: -webkit-linear-gradient(top,  #badff3 0%,#7acbed 100%);
+	background: -o-linear-gradient(top,  #badff3 0%,#7acbed 100%);
+	background: -ms-linear-gradient(top,  #badff3 0%,#7acbed 100%);
+	background: linear-gradient(top,  #badff3 0%,#7acbed 100%);
+	background-color: #9FD7F0;
+	cursor: pointer;
+	text-shadow: 0 -1px rgba(0,0,0,0.15);
+	outline: none;
+}
 #form .sub button {
 	float: right;
 	padding: 6px 20px;
@@ -221,4 +253,29 @@ footer p {
     text-align: center; font-size: 17px;
     color: #888; margin-top: 24px;
 }
-
+.buttonnavigation {
+border-radius: 5px;
+font-size: 10px;
+padding: 5px 30px;
+cursor: pointer;
+color: #fff;
+ background: -webkit-linear-gradient(top,  #a8c4c0 0%,#7aa5a2 100%);font-size: 1.0rem;
+font-family: 'Roboto';
+font-weight: 100;
+border: 1px solid #fff;
+box-shadow: 2px 2px 5px #F0F5F7;
+-webkit-transition-duration: 0.5s;
+-moz-transition-duration: 0.5s;
+}
+#next>disabled
+{
+	color: #000000;
+}
+#next
+{
+    margin: 0 0 0 80px;
+}
+#prev
+{
+    margin: 0 80px 0 0;
+}

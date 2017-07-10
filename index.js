@@ -63,6 +63,7 @@ function getdata()
 				//console.log(i+"-"+arr[i].slice(0,1));
 			}
 		 positiveArr=arr;
+		 pagination(0,5);
 //////////////////////////
 Highcharts.chart('chart', {   
   subtitle : {
@@ -111,8 +112,6 @@ $(function()
 	$('div.vacancies ').hide()
 	$('div.vacancies:contains("' + $('#keywords').val() + '")')
     .filter(function(elem){
-		//console.log("start");
-		//console.log($(this).find("#SalaryMin").html());
 		var bool3=false;
 		if($('#minsalary').val().length>0)
 		{

@@ -7,7 +7,6 @@
   <meta charset="utf-8" />
   <title>Тестовое задание</title>
 <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-<script src="jQuery.paginate.min.js"></script>
 <script src="https://code.highcharts.com/highcharts.js"></script>
 <script src="https://code.highcharts.com/modules/data.js"></script>
 <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAD0Q4OQZGUKvXAlNdPqn6Nblvxu1oL-Bk"></script>
@@ -44,8 +43,14 @@
 </div>
 <div class="list" id="list">
  <div class="holder"></div>
+ 
 </div>
-<div style="clear: both;"></div>
+<div style="clear: both;">
+ <button type="button" class="buttonnavigation" id="prev" onclick="prevlist()">Предыдущая страница</button>
+ <span id="index2" align="center">1</span>
+ <button type="button" class="buttonnavigation" id="next" onclick="nextlist();">Следующая страница</button>
+
+</div>
 </div>
 <footer>
     <p>&copy; 2017 Alexander Mikheev.</p>
@@ -54,16 +59,66 @@
 $(document).ready(function() 
 {
   getdata();
-   $(function() {
-    /* initiate plugin */
-    $(".list div.holder").jPages({
-        containerID: "list"
-    });
-});
+  
 });
 </script>
  <script>
-  
+ function pagination(n1,n2)
+ {
+
+  //$("div.vacancies").hide();
+  //$("div.vacancies").slice(n1,n2).show();
+  $('div.vacancies,[dispay = block]').css("visibility", "hidden");
+  $('div.vacancies,[dispay = block]').slice(n1,n2).css("visibility", "visible");
+  //$('div.vacancies:not([dispay])').hide();
+ //$('div.vacancies,[dispay]').slice(n1,n2).show();
+  //$('div.vacancies [dispay = block]').slice(n1,n2).css("visibility", "visible");
+ //console.log(parseInt($('#index2').html()));
+  //если пользователь на первой странице то необходимо заблокировать кнопку предыдущая страница
+  if  (parseInt($('#index2').html())==1) 
+  {
+  $("#prev").prop("disabled", true);
+  $('#prev').css("visibility", "hidden");
+  }
+  else 
+  {
+  $("#prev").prop("disabled", false);
+  $('#prev').css("visibility", "visible");
+  }
+
+  //если пользователь на последней странице то необходимо заблокировать кнопку следующая страница
+  if (n1+5>=$("div.vacancies").length) 
+  {
+  $("#next").prop("disabled", true); $('#next').css("visibility", "hidden");}
+  else 
+  {
+  if ($("#next").prop("disabled", true)) $("#next").prop("disabled", false);
+  //в будущем надо добавить проверку скрыт ли элемент
+   $('#next').css("visibility", "visible");
+  }
+
+ }
+function nextlist()
+{
+//console.log(parseInt(document.getElementsByTagName('index2').nodeValue,10));
+//console.log();
+//console.log( $('#index2').val());
+ var n = parseInt($('#index2').html());
+ $("#index2").html(n+1);
+ console.log(n);
+ pagination((n)*5,(n+1)*5);
+
+}
+function prevlist()
+{
+//console.log(parseInt(document.getElementsByTagName('index2').nodeValue,10));
+//console.log();
+//console.log( $('#index2').val());
+ var n = parseInt($('#index2').html());
+ $("#index2").html(n-1);
+ pagination((n-2)*5,(n-1)*5);
+
+}
 function initMap() {
     var centerLatLng = new google.maps.LatLng(54.507014, 36.252277);
     var mapOptions = {
