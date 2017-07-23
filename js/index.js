@@ -7,13 +7,14 @@ function FilterVacancies()
   generateListVacancies();
   getChart();
   initMap();
-  pagination(0,5);	 
+  countVacancies();
+  pagination(0,colVacancies);	 
  }
 function Filter()
  {
   positiveArr = arr.filter(function(number) 
    {
-     var bool=false,bool1=false,bool2=false;
+     var bool=false,bool1=false,bool2=false,bool3=false,bool4=false;
      if (($('#keywords').val()=='Зарплата') ||($('#keywords').val()=='Компания') || ($('#keywords').val()=='Обязанности')|| $('#keywords').val().length==0) bool=true;
      if ($('#keywords').val().length>0)
 	  {
@@ -35,7 +36,24 @@ function Filter()
 	   if (parseInt(number.slice(2,3))<= $('#maxsalary').val()) bool2=true; else bool2=false;	
 	  } 
 	else  bool2=true;
-    return bool && bool1 && bool2;
+	//
+	 if ($('#Сompanylist').val().length>0)
+	  {
+	   if ($('#Сompanylist').val()=="All")bool3=true;
+	   var x=number.slice(4,5)[0].toString();
+	   if (x.indexOf($('#Сompanylist').val())>=0) bool3=true;
+	  }
+	 else bool3=true;
+	 if (checkBox.checked)
+      {
+	   console.log("Yes");
+       var bl=true,bl1=true;
+	   if (number.slice(1,2)[0]) console.log("t1");else  bl=false;
+	   if (number.slice(2,3)[0]) console.log("t1");else  bl1=false;
+       bool4= bl || bl1;
+      } else bool4=true;
+
+    return bool && bool1 && bool2 && bool3 && bool4;
    });
 }
 function getData()//Функция получает Json данные и записывает в массив
@@ -86,7 +104,9 @@ function getData()//Функция получает Json данные и зап�
    generateListVacancies();
    getChart();
    initMap();
-   pagination(0,5);	 
+   countVacancies();
+   pagination(0,colVacancies);	
+   getCompany();   
   });
 }
 //Функция подготавливает данные и строит график

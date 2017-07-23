@@ -124,6 +124,10 @@ footer p
 	font: 14px/18px Arial, Tahoma, sans-serif;
 	color: #444;
 }
+#chartSetting
+ {
+	float:left;
+}
 #form .pole {
 	margin: 0 0 18px;
 }	
@@ -138,6 +142,16 @@ footer p
   	font: 12px Arial, Tahoma, sans-serif;
 	color: #444;
 	width: 262px;
+	padding: 9px 13px;
+  	border: 1px solid #D2D9DC;
+	border-radius: 3px;
+	box-shadow: inset 2px 2px 6px #EBEBEB, 0 0 0 5px #F7F9FA;
+	outline: none;
+}
+#form .pole select {
+  	font: 12px Arial, Tahoma, sans-serif;
+	color: #444;
+	width: 290px;
 	padding: 9px 13px;
   	border: 1px solid #D2D9DC;
 	border-radius: 3px;

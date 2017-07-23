@@ -37,7 +37,16 @@
 	    <label>По фразе:</label>
 		<div class="input"><input type="text" id="keywords" placeholder="Введите фразу для поиска"  ></div>
 	</div>
-
+	
+	<div class="pole" >
+	    <label>По Компании:</label>
+		<div class="input">
+		 <select id="Сompanylist" onChange="getCompany()">
+		  <option value = "All" selected>Все компании</option>
+		 </select>
+		</div>
+	</div>
+    <input id="checkBox" type="checkbox"> <label for="checkBox">Только вакансии с указанной зарплатой</label>
 	<div class="sub">
 		<button type="button" onclick="FilterVacancies();">Поиск</button>
 	</div>
@@ -54,6 +63,14 @@
  </div>
  </div>
 
+</div>
+<div class="panel" id="panel">
+	<select id="blacklist" onChange="countVacancies()">
+			<option value = "5" selected>5</option>
+			<option value = "10">10</option>
+			<option value = "20" >20</option>
+			<option value = "All" >Все</option>
+		</select>
 </div>
 <div class="list" id="list">
  <div class="holder"></div>
