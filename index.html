@@ -6,18 +6,20 @@
   <![endif]-->
   <meta charset="utf-8" />
   <title>Тестовое задание</title>
-<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-<script src="https://code.highcharts.com/highcharts.js"></script>
-<script src="https://code.highcharts.com/modules/data.js"></script>
-<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAD0Q4OQZGUKvXAlNdPqn6Nblvxu1oL-Bk"></script>
+<script src="js/lib/jquery-3.1.1.min.js"></script>
+<script src="js/lib/highcharts.js"></script>
+<script src="js/lib/data.js"></script>
+<script src="js/index.js"></script> 
+<script src="js/navigation.js"></script> 
+<script src="js/visualisation.js"></script> 
+<script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAD0Q4OQZGUKvXAlNdPqn6Nblvxu1oL-Bk"></script>
 
-<script src="index.js"></script> 
 <link rel="stylesheet" type="text/css" href="style.css" />
 </head>
 <body>
 <div class="container" id="contain">
-<div id="header"><img src="test.jpg" alt="Поиск работы" width=500px height=200px /><img src="test22.jpg" alt="Поиск работы" width=500px height=200px /> </div>
-<section id="visualisation"><div id="map" class="map"></div><div id="chart"></div></section >
+<div id="header"><img src="image/12.jpg" alt="Поиск работы" width=1000px height=300px /></div>
+<section id="visualisation"><div id="chart"></div></section >
 <div class="contain" id="contain" >
 <div id="found">
 <form id="form" method="post">
@@ -37,19 +39,21 @@
 	</div>
 
 	<div class="sub">
-		<button type="button" onclick="FindbyWords();">Поиск</button>
+		<button type="button" onclick="FilterVacancies();">Поиск</button>
 	</div>
 </form>
+ <div id="map" class="map"></div>
  <!-- ССЫЛКА НА ОКНО -->
- <button type="button" class="buttonnavigation"  onclick="this.nextElementSibling.style.display='block';">Помощь</button>
+ <button type="button" class="buttonhelp"  onclick="this.nextElementSibling.style.display='block';">Помощь</button>
  <!-- ОКНО -->
  <div id="parent_popup_click1" class="parent_popup_click">
   <div class="popup_click">
    <h2>Для поиска интересующих вакансий:</h2>
-    <p><center><img src="help.png" alt="помощь" width=600px height=440px></center>
+    <p><center><img src="image/help.png" alt="помощь" width=600px height=440px></center>
     <a class="close" title="Закрыть" onclick="document.getElementById('parent_popup_click1').style.display='none';">X</a>
  </div>
  </div>
+
 </div>
 <div class="list" id="list">
  <div class="holder"></div>
@@ -67,144 +71,12 @@
 <script>
 $(document).ready(function() 
 {
-  getdata();
-  
+  getData();
 });
 </script>
  <script>
- function pagination(n1,n2)
- {
 
-  $("div.vacancies").hide();
-  $("div.vacancies").slice(n1,n2).show();
- // $('div.vacancies,[dispay = block]').css("visibility", "hidden");
- // $('div.vacancies,[dispay = block]').slice(n1,n2).css("visibility", "visible");
-  //$('div.vacancies:not([dispay])').hide();
- //$('div.vacancies,[dispay]').slice(n1,n2).show();
-  //$('div.vacancies [dispay = block]').slice(n1,n2).css("visibility", "visible");
- //console.log(parseInt($('#index2').html()));
-  //если пользователь на первой странице то необходимо заблокировать кнопку предыдущая страница
-  if  (parseInt($('#index2').html())==1) 
-  {
-  $("#prev").prop("disabled", true);
-  $('#prev').css("visibility", "hidden");
-  }
-  else 
-  {
-  $("#prev").prop("disabled", false);
-  $('#prev').css("visibility", "visible");
-  }
 
-  //если пользователь на последней странице то необходимо заблокировать кнопку следующая страница
-  if (n1+5>=$("div.vacancies").length) 
-  {
-  $("#next").prop("disabled", true); $('#next').css("visibility", "hidden");}
-  else 
-  {
-  if ($("#next").prop("disabled", true)) $("#next").prop("disabled", false);
-  //в будущем надо добавить проверку скрыт ли элемент
-   $('#next').css("visibility", "visible");
-  }
-
- }
-function nextlist()
-{
-//console.log(parseInt(document.getElementsByTagName('index2').nodeValue,10));
-//console.log();
-//console.log( $('#index2').val());
- var n = parseInt($('#index2').html());
- $("#index2").html(n+1);
- console.log(n);
- pagination((n)*5,(n+1)*5);
-
-}
-function prevlist()
-{
-//console.log(parseInt(document.getElementsByTagName('index2').nodeValue,10));
-//console.log();
-//console.log( $('#index2').val());
- var n = parseInt($('#index2').html());
- $("#index2").html(n-1);
- pagination((n-2)*5,(n-1)*5);
-
-}
-function initMap() {
-    var centerLatLng = new google.maps.LatLng(54.507014, 36.252277);
-    var mapOptions = {
-        center: centerLatLng,
-        zoom: 10
-    };
-  
-    map = new google.maps.Map(document.getElementById("map"), mapOptions);
-  
-    // Создаем объект информационного окна и помещаем его в переменную infoWindow
-    // Так как у каждого информационного окна свое содержимое, то создаем пустой объект, без передачи ему параметра content
-    infoWindow = new google.maps.InfoWindow();
-  
-    // Отслеживаем клик в любом месте карты
-    google.maps.event.addListener(map, "click", function() {
-        // infoWindow.close - закрываем информационное окно.
-        infoWindow.close();
-    });
-    var x=0;
-    // Перебираем в цикле все координата хранящиеся в markersData
-    for (var i = 0; i < positiveArr.length; i++){
-        if (positiveArr[i].slice(5,6)[0]!=null && positiveArr[i].slice(6,7)[0]!=null)
-		{
-          var latLng = new google.maps.LatLng(positiveArr[i].slice(5,6)[0], positiveArr[i].slice(6,7)[0]);
-          var name = positiveArr[i].slice(0,1)[0];
-          var description =positiveArr[i].slice(3,4)[0];
-		  //console.log(positiveArr[i].slice(0,1)[0]);
-          x++;
-		  //console.log(positiveArr[i].slice(5,6)[0],positiveArr[i].slice(6,7)[0]);
-          // Добавляем маркер с информационным окном
-          addMarker(latLng, name, description);
-		}
-    }
-	console.log(x+"markers");
-  
-}
-google.maps.event.addDomListener(window, "load", initMap);
-  
-// Функция добавления маркера с информационным окном
-function addMarker(latLng, name, description) {
-    var marker = new google.maps.Marker({
-        position: latLng,
-        map: map,
-        title: name
-    });
-  
-    // Отслеживаем клик по нашему маркеру
-    google.maps.event.addListener(marker, "click", function() {
-        //надо сделать получение нескольких вакансий в одной точке!!
-		//console.log(latLng.lat(),lng());
-		var contentString = '<div class="infowindow">';
-		for(var i=0;i<positiveArr.length;i++)
-		{
-		//console.log(i);
-		  //console.log(arr[i].slice(5,6)[0]+"/"+latLng.lat().toFixed(6)+"/"+arr[i].slice(6,7)[0]+"/"+latLng.lng().toFixed(6));
-		 if (positiveArr[i].slice(5,6)[0]==latLng.lat().toFixed(6) && positiveArr[i].slice(6,7)[0]==latLng.lng().toFixed(6))
-		 {
-		 // console.log("совпало");
-		 // console.log(arr[i].slice(5,6)[0]+"/"+latLng.lat().toFixed(6)+"/"+arr[i].slice(6,7)[0]+"/"+latLng.lng().toFixed(6));
-	      contentString+='<h3>' + positiveArr[i].slice(0,1)[0] + '</h3>' + '<p>' + positiveArr[i].slice(3,4)[0] + '</p>';
-		 }
-		}
-		contentString+='</div>'
-        // contentString - это переменная в которой хранится содержимое информационного окна.
-        //var contentString = '<div class="infowindow">' +
-        //                        '<h3>' + name + '</h3>' +
-        //                        '<p>' + description + '</p>' +
-        //                   '</div>';
-        // console.log(contentString);
-        // Меняем содержимое информационного окна
-        infoWindow.setContent(contentString);
-  
-        // Показываем информационное окно
-        infoWindow.open(map, marker);
-  
-    });
-}
     </script>
 
 </script>

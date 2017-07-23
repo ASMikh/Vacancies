@@ -1,0 +1,7 @@
+﻿{
+    "url":"https://api.hh.ru/vacancies",
+    "per_page":"50",
+    "page":"1",
+    "order_by":"publication_time",
+    "area":"43"
+}
