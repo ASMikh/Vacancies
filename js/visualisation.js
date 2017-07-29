@@ -54,16 +54,29 @@ function addMarker(latLng, name, description)
    });
  }
  //функция построения графика
-function Chart(named,minrub,maxrub)
+function Chart(AxisX,AxisY,type)
  {
+  //delNulVal(AxisX,AxisY);
   Highcharts.chart('chart', { 
   title:{text: 'График зарплат по вакансиям'}, 
   subtitle : { text: 'Данные взяты с сайта hh.ru'},
-  xAxis :{ categories: named,
+  xAxis :{ categories: AxisX,
    title:{ text: 'Список организаций'},},
   yAxis :{title: {text: 'Зарплата в рублях'},
    plotLines: [{value: 0,width: 1,color: '#808080' }]
   },  
-  series:[{type: 'column',name: 'Минимальная зарплата',data: minrub},
-	{type: 'column',name: 'Максимальная зарплата',data: maxrub }]
+  series:[{type: type.toString(),name: 'Минимальная зарплата',data: AxisY}]
  });}
+ function delNulVal(massiv1,massiv2)
+{
+ var x=massiv2.length;
+ for(var i=0;i<x;i++)
+  {	
+   if (isNaN(massiv2[i]))
+	{
+	  massiv1.splice(i, 1);
+	  massiv2.splice(i, 1);
+	  //i--;
+	}
+  }
+}

@@ -261,12 +261,12 @@ footer p
 	border-radius: 5px;
 	font-size: 10px;
 	padding: 10px 125px;
+	margin-top: 10px;
 	cursor: pointer;
 	color: #fff;
     background: -webkit-linear-gradient(top,  #a8c4c0 0%,#7aa5a2 100%);
 	font-size: 1.4rem;
 	font-family: 'Roboto';
-	font-weight: 100;
 	border: 1px solid #fff;
 	box-shadow: 2px 2px 5px #F0F5F7;
 	-webkit-transition-duration: 0.5s;
@@ -392,4 +392,106 @@ footer p
 .close:hover
 {
     background-color: rgba(255, 69, 0, 0.8);
+}
+#charts select {
+    border-radius: 0;
+    background: transparent;
+    height: 64px;
+    padding: 5px;
+    border: 0;
+    font-size: 16px;
+    line-height: 1;
+    -webkit-appearance: none;
+    width: 268px;
+  }
+.panel
+{
+	height:60px;
+	width :620px;
+	background: #F0F5F7;  
+    display: block;
+    padding:10px;  
+    border-radius: 10px;
+    float:left;
+	margin-bottom:10px;
+}
+
+.wrap {
+height: 400px;
+margin: 50px auto 0;
+position: relative;
+width: 600px;
+}
+/*Скрываем радиокнопки*/
+.wrap > input {
+display: none;
+}
+.slider {
+background-color: #333;
+height: inherit;
+overflow: hidden;
+position: relative;
+width: inherit;
+}
+.slides {
+height: inherit;
+opacity: 0;
+position: absolute;
+width: inherit;
+z-index: 0;
+}
+.img1 { background-image: url(image/help1.png); }
+.img2 { background-image: url(image/help2.png); }
+.img3 { background-image: url(image/help3.png); }
+.wrap .control {
+position: absolute;
+margin-left: -50px;
+left: 50%;
+}
+.wrap label {
+cursor: pointer;
+display: inline-block;
+height: 8px;
+margin: 10px;
+position: relative;
+width: 8px;
+border-radius: 20%;
+}
+.wrap label:after 
+{
+border: 2px solid #7aa5a2;
+content: " ";
+display: block;
+height: 12px;
+left: -4px;
+position: absolute;
+top: -4px;
+width: 12px;
+border-radius: 20%;
+}
+#point1:checked ~ .control label:nth-of-type(1),
+#point2:checked ~ .control label:nth-of-type(2),
+#point3:checked ~ .control label:nth-of-type(3) {
+background: #7aa5a2;
+}
+#point1:checked ~ .slider > .img1,
+#point2:checked ~ .slider > .img2,
+#point3:checked ~ .slider > .img3 {
+opacity: 1;
+z-index: 1;
+}
+.Downloadfile
+{
+border-radius: 5px;
+	font-size: 10px;
+	padding: 10px 84px;
+	cursor: pointer;
+	color: #fff;
+    background: -webkit-linear-gradient(top,  #a8c4c0 0%,#7aa5a2 100%);
+	font-size: 1.4rem;
+	font-family: 'Roboto';
+	border: 1px solid #fff;
+	box-shadow: 2px 2px 5px #F0F5F7;
+	-webkit-transition-duration: 0.5s;
+	-moz-transition-duration: 0.5s;
 }

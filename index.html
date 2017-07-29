@@ -19,7 +19,8 @@
 <body>
 <div class="container" id="contain">
 <div id="header"><img src="image/12.jpg" alt="Поиск работы" width=1000px height=300px /></div>
-<section id="visualisation"><div id="chart"></div></section >
+<section id="visualisation">
+<div id="chart"></div></section >
 <div class="contain" id="contain" >
 <div id="found">
 <form id="form" method="post">
@@ -51,21 +52,53 @@
 		<button type="button" onclick="FilterVacancies();">Поиск</button>
 	</div>
 </form>
+
  <div id="map" class="map"></div>
+ <h3>Дополнительные полезные функции</h3>
+  <a download="data.json" class="Downloadfile"  id="test" href="#">Скачать данные</a>
+  <br>
  <!-- ССЫЛКА НА ОКНО -->
  <button type="button" class="buttonhelp"  onclick="this.nextElementSibling.style.display='block';">Помощь</button>
  <!-- ОКНО -->
  <div id="parent_popup_click1" class="parent_popup_click">
   <div class="popup_click">
-   <h2>Для поиска интересующих вакансий:</h2>
-    <p><center><img src="image/help.png" alt="помощь" width=600px height=440px></center>
+   <div class = "wrap">
+    <input type="radio" name="slides" id="point1" checked>
+    <input type="radio" name="slides" id="point2">
+    <input type="radio" name="slides" id="point3">
+    <div class="slider">
+     <div class="slides img1"></div>
+     <div class="slides img2"></div>
+     <div class="slides img3"></div>
+    </div>
+	<div class="control">
+     <label for="point1"></label>
+     <label for="point2"></label>
+     <label for="point3"></label>
+    </div>
+   </div>
     <a class="close" title="Закрыть" onclick="document.getElementById('parent_popup_click1').style.display='none';">X</a>
  </div>
  </div>
 
 </div>
-<div class="panel" id="panel">
-	<select id="blacklist" onChange="countVacancies()">
+
+<div class="panel">
+<label>Выберите график:</label>
+ <select id="charts" onChange="getChart()">
+ <option value = "0" selected>Минимальная зарплата по вакансиям</option>
+ <option value = "1" >Максимальная зарплата по вакансиям</option>
+ <option value = "2" >Количество вакансий по кампаниям</option>
+ <option value = "3" >Средняя зарплата по компаниям</option>
+ </select><br>
+<label>Выберите тип графика:</label>
+ <select id="charts2" onChange="getChart()">
+ <option value = "line" selected>line</option>
+ <option value = "area" >area</option>
+ <option value = "column" >column</option>
+ </select><br>
+ <label>Количество вакансий на странице:</label>
+ <select id="blacklist" onChange="countVacancies()">
 			<option value = "5" selected>5</option>
 			<option value = "10">10</option>
 			<option value = "20" >20</option>
@@ -91,11 +124,6 @@ $(document).ready(function()
   getData();
 });
 </script>
- <script>
 
-
-    </script>
-
-</script>
 </body>
 </html>

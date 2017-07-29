@@ -55,49 +55,4 @@ function prevlist()
   $("#index2").html(n-1);
   pagination((n-2)*colVacancies,(n-1)* colVacancies);
  }
- function countVacancies()
- {
-  $("#index2").html(1);
-  var sel = document.getElementById("blacklist"); // Получаем наш список
-  console.log(sel.options[sel.selectedIndex].value);
-  if (sel.options[sel.selectedIndex].value=="All")
-  {
-	 console.log();
-	 colVacancies=positiveArr.length
-  }
-  else
-  colVacancies = sel.options[sel.selectedIndex].value; // Получаем значение выделенного элемента (в нашем случае fruit2).
-  //colVacancies = document.getElementById("blacklist").options.selectedIndex;
-  pagination(0,colVacancies);	
- }
 
-function getCompany()
- {
-  var company=[];
-  for(var i=0;i<positiveArr.length;i++)
-   {//проверяем есть ли у вакансии минимальная или максимальная зарплата(иначе нет смысла выводить на график!)
-	if ((positiveArr[i].slice(4,5)[0]))
-	 {
-	 company.push(positiveArr[i].slice(4,5));
-	 }
-   }
-  var options = $.map(unique(company), function(item) 
-  {
-   return new Option(item);
-  });
-  console.log("Company");
-  $("#Сompanylist").append(options);
-}
-function unique(arr) 
-{
- var obj = {};
- for (var i = 0; i < arr.length; i++) 
-  {
-   var str = arr[i];
-   obj[str] = true; // запомнить строку в виде свойства объекта
-  }
-  return Object.keys(obj); // или собрать ключи перебором для IE8-
-}
-
-
- 
