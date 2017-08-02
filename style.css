@@ -42,7 +42,6 @@ footer p
     background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#a8c4c0), color-stop(100%,#7aa5a2));
     background: -o-linear-gradient(top,  #a8c4c0 0%,#7aa5a2 100%);
     background: -ms-linear-gradient(top,  #a8c4c0 0%,#7aa5a2 100%);
-    background: linear-gradient(top,  #a8c4c0 0%,#7aa5a2 100%);
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a8c4c0', endColorstr='#7aa5a2',GradientType=0 );
     font-size: 20px;
     font-weight: bold;
@@ -58,7 +57,6 @@ footer p
     color: #3b3a3b;  
     text-shadow: 0 1px 0 rgba(255, 255, 255, 0.4);  
 }  
-/* Стили для кнопки отправить */
 #btn {
     width: 138px;
     height: 44px;
@@ -258,17 +256,13 @@ footer p
 }
 .buttonhelp 
 {
-	border-radius: 5px;
-	font-size: 10px;
-	padding: 10px 125px;
-	margin-top: 10px;
+	border-radius: 3px;
 	cursor: pointer;
 	color: #fff;
     background: -webkit-linear-gradient(top,  #a8c4c0 0%,#7aa5a2 100%);
-	font-size: 1.4rem;
+	font-size: 1.00rem;
 	font-family: 'Roboto';
 	border: 1px solid #fff;
-	box-shadow: 2px 2px 5px #F0F5F7;
 	-webkit-transition-duration: 0.5s;
 	-moz-transition-duration: 0.5s;
 }
@@ -283,12 +277,11 @@ footer p
 {
    background: #F0F5F7;  
    /*margin-left: 15px;*/
-   //margin-bottom:10px;
+   margin-bottom:10px;
    display: block;
    width: 620px;
    min-height: 180px;
    padding:10px;  
-   border-radius: 10px;
    float:left;
 }
 .find
@@ -306,7 +299,6 @@ footer p
 {
 	border-radius: 10px;
 }
-/* Всплывающее окно */	
 .parent_popup, .parent_popup_click {
   background-color: rgba(0, 0, 0, 0.8);
   display: none;
@@ -325,11 +317,9 @@ footer p
 	padding: 5px 20px 13px 20px;
 	border: 10px solid #ddd;
 	position: relative;
-	/*--CSS3 CSS3 Тени для Блока--*/
 	-webkit-box-shadow: 0px 0px 20px #000;
 	-moz-box-shadow: 0px 0px 20px #000;
 	box-shadow: 0px 0px 20px #000;
-	/*--CSS3 Закругленные углы--*/
 	-webkit-border-radius: 10px;
 	-moz-border-radius: 10px;
 	border-radius: 10px;
@@ -406,19 +396,32 @@ footer p
   }
 .panel
 {
-	height:60px;
-	width :620px;
+	width :600px;
 	background: #F0F5F7;  
     display: block;
-    padding:10px;  
-    border-radius: 10px;
-    float:left;
-	margin-bottom:10px;
+    float:left; 
+    background: #a8c4c0;
+    background: -moz-linear-gradient(top,  #a8c4c0 0%, #7aa5a2 100%);
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#a8c4c0), color-stop(100%,#7aa5a2));
+    background: -o-linear-gradient(top,  #a8c4c0 0%,#7aa5a2 100%);
+    background: -ms-linear-gradient(top,  #a8c4c0 0%,#7aa5a2 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a8c4c0', endColorstr='#7aa5a2',GradientType=0 );
+    font-weight: bold;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+    padding: 0 20px;  
+    line-height: 50px;
+    height: 50px; 
+    margin-left: 0px;  
+    box-shadow: 0px 3px 4px 0px rgba(0,0,0,0.3);
+    -moz-box-shadow: 0px 3px 4px 0px rgba(0,0,0,0.3);
+	-webkit-box-shadow: 0px 3px 4px 0px rgba(0,0,0,0.3);
+    color: #3b3a3b;  
+    text-shadow: 0 1px 0 rgba(255, 255, 255, 0.4);  
 }
 
 .wrap {
 height: 400px;
-margin: 50px auto 0;
+margin: 0px auto 0;
 position: relative;
 width: 600px;
 }
@@ -440,9 +443,9 @@ position: absolute;
 width: inherit;
 z-index: 0;
 }
-.img1 { background-image: url(image/help1.png); }
-.img2 { background-image: url(image/help2.png); }
-.img3 { background-image: url(image/help3.png); }
+.img1 { background-image: url(image/helpcharts.png); }
+.img2 { background-image: url(image/helpfilter.png); }
+.img3 { background-image: url(image/helpmap.png); }
 .wrap .control {
 position: absolute;
 margin-left: -50px;
@@ -494,4 +497,121 @@ border-radius: 5px;
 	box-shadow: 2px 2px 5px #F0F5F7;
 	-webkit-transition-duration: 0.5s;
 	-moz-transition-duration: 0.5s;
+}
+@keyframes spin {
+    to { transform: rotate(1turn); }
+}
+.progress {
+    position: relative;
+    display: inline-block;
+    width: 5em;
+    height: 5em;
+    margin: 10px;
+    font-size: 8px;
+    text-indent: 999em;
+    overflow: hidden;
+    animation: spin 1s infinite steps(8);
+}
+.progress:before,
+.progress:after,
+.progress > div:before,
+.progress > div:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 2.25em;
+    width: .5em;
+    height: 1.5em;
+    border-radius: .2em;
+    background: #eee;
+    box-shadow: 0 3.5em #eee;
+    transform-origin: 50% 2.5em;
+}
+.progress:before {
+    background: #555;
+}
+.progress:after {
+    transform: rotate(-45deg);
+    background: #777;
+}
+.progress > div:before {
+    transform: rotate(-90deg);
+    background: #999;
+}
+.progress > div:after {
+    transform: rotate(-135deg);
+    background: #bbb;
+}
+
+.Count, .Downloadjson, .chartSetting, .Help
+{
+ display: inline-block;
+ height:50px;
+ min-width:30px;
+}
+.Help, .Downloadjson
+{
+float:right;
+margin:0px 5px;
+}
+.Count > select, .Downloadjson > select, .chartSetting > select, .Help  > select
+{
+ height:25px;
+}
+.panel img {
+position:relative;
+left: 50%; 
+top: 20%; 
+margin-top: -15px; 
+margin-left:-15px;
+}
+
+
+.onoffswitch {
+    position: relative; width: 50px;
+    -webkit-user-select:none; -moz-user-select:none; -ms-user-select: none;
+}
+#divswitch {
+float:right;
+}
+.onoffswitch-checkbox {
+    display: none;
+}
+.onoffswitch-label {
+    display: block; overflow: hidden; cursor: pointer;
+    border: 2px solid #999999; border-radius: 20px;
+}
+.onoffswitch-inner {
+    display: block; width: 200%; margin-left: -100%;
+    transition: margin 0.3s ease-in 0s;
+}
+.onoffswitch-inner:before, .onoffswitch-inner:after {
+    display: block; float: left; width: 50%; height: 15px; padding: 0; line-height: 15px;
+    font-size: 10px; color: white; font-family: Trebuchet, Arial, sans-serif; font-weight: bold;
+    box-sizing: border-box;
+}
+.onoffswitch-inner:before {
+    content: "ON";
+    padding-left: 10px;
+    background-color: #34A7C1; color: #FFFFFF;
+}
+.onoffswitch-inner:after {
+    content: "OFF";
+    padding-right: 10px;
+    background-color: #EEEEEE; color: #999999;
+    text-align: right;
+}
+.onoffswitch-switch {
+    display: block; width: 10px; margin: 2.5px;
+    background: #FFFFFF;
+    position: absolute; top: 0; bottom: 0;
+    right: 31px;
+    border: 2px solid #999999; border-radius: 20px;
+    transition: all 0.3s ease-in 0s; 
+}
+.onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-inner {
+    margin-left: 0;
+}
+.onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-switch {
+    right: 0px; 
 }

@@ -1,44 +1,40 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ru">
 <head>
-  <!--[if IE]>
-  <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-  <![endif]-->
-  <meta charset="utf-8" />
-  <title>Тестовое задание</title>
-<script src="js/lib/jquery-3.1.1.min.js"></script>
-<script src="js/lib/highcharts.js"></script>
-<script src="js/lib/data.js"></script>
-<script src="js/index.js"></script> 
-<script src="js/navigation.js"></script> 
-<script src="js/visualisation.js"></script> 
-<script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAD0Q4OQZGUKvXAlNdPqn6Nblvxu1oL-Bk"></script>
-
-<link rel="stylesheet" type="text/css" href="style.css" />
+ <!--[if IE]><script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+ <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+ <title>Тестовое задание</title>
+ <script src="js/lib/jquery-3.1.1.min.js"></script>
+ <script src="js/lib/highcharts.js"></script>
+ <script src="js/lib/data.js"></script>
+ <script src="js/lib/detect.js"></script>
+ <script src="js/index.js"></script> 
+ <script src="js/navigation.js"></script> 
+ <script src="js/visualisation.js"></script> 
+ <script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAD0Q4OQZGUKvXAlNdPqn6Nblvxu1oL-Bk"></script>
+ <link rel="stylesheet" type="text/css" href="style.css" />
 </head>
 <body>
-<div class="container" id="contain">
-<div id="header"><img src="image/12.jpg" alt="Поиск работы" width=1000px height=300px /></div>
-<section id="visualisation">
-<div id="chart"></div></section >
-<div class="contain" id="contain" >
-<div id="found">
-<form id="form" method="post">
+ <section class="container" >
+ <header id="header"><img src="image/header.jpg" alt="Header" width="1000" height="300" /></header>
+ <section id="visualisation">
+  <div id="chart"></div>
+ </section >
+ <section class="contain" id="contain" >
+  <aside id="found">
+    <form id="form" method="post">
 	<div class="pole">
 		<label>Минимальная зарплата:</label>
 		<div class="input"><input type="number" id="minsalary" placeholder="Введите минимальную зарплату" ></div>
 	</div>
-
 	<div class="pole" >
 	    <label>Максимальная зарплата:</label>
 		<div class="input"><input type="number" id="maxsalary" placeholder="Введите максимальную зарплату" ></div>
 	</div>
-	
 	<div class="pole" >
 	    <label>По фразе:</label>
 		<div class="input"><input type="text" id="keywords" placeholder="Введите фразу для поиска"  ></div>
 	</div>
-	
 	<div class="pole" >
 	    <label>По Компании:</label>
 		<div class="input">
@@ -47,16 +43,49 @@
 		 </select>
 		</div>
 	</div>
-    <input id="checkBox" type="checkbox"> <label for="checkBox">Только вакансии с указанной зарплатой</label>
+	<label>Только вакансии с указанной з.п.:</label>
+	<div class="onoffswitch" id="divswitch">	
+    <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch" >
+    <label class="onoffswitch-label" for="myonoffswitch">
+        <span class="onoffswitch-inner"></span>
+        <span class="onoffswitch-switch"></span>
+    </label>
+
+	</div>
+
 	<div class="sub">
 		<button type="button" onclick="FilterVacancies();">Поиск</button>
 	</div>
-</form>
-
- <div id="map" class="map"></div>
- <h3>Дополнительные полезные функции</h3>
-  <a download="data.json" class="Downloadfile"  id="test" href="#">Скачать данные</a>
-  <br>
+    </form>
+    <div id="map" class="map"></div>
+  </aside>
+<div class="contentlist">
+<aside class="panel">
+<div class="Count">
+ <select id="blacklist" onChange="countVacancies()"  title="Type search term here">
+			<option value = "5" selected>5</option>
+			<option value = "10">10</option>
+			<option value = "20" >20</option>
+			<option value = "All" >Все</option>
+		</select>
+</div>
+<div class="chartSetting">
+ <select id="charts" onChange="getChart()">
+ <option value = "0" selected>Минимальная зарплата по вакансиям</option>
+ <option value = "1" >Максимальная зарплата по вакансиям</option>
+ <option value = "2" >Количество вакансий по кампаниям</option>
+ <option value = "3" >Средняя зарплата по компаниям</option>
+ </select>
+ <select id="charts2" onChange="getChart()">
+ <option value = "line" selected>Line</option>
+ <option value = "area" >Area</option>
+ <option value = "column" >Column</option>
+ </select>
+</div>
+<div class="Downloadjson">
+ <a download="data.json" id="test" href="#"><img src="image/json.png" alt="Скачать данные" width="30" height="30" /></a>
+</div>
+<div class="Help">
  <!-- ССЫЛКА НА ОКНО -->
  <button type="button" class="buttonhelp"  onclick="this.nextElementSibling.style.display='block';">Помощь</button>
  <!-- ОКНО -->
@@ -83,46 +112,36 @@
 
 </div>
 
-<div class="panel">
-<label>Выберите график:</label>
- <select id="charts" onChange="getChart()">
- <option value = "0" selected>Минимальная зарплата по вакансиям</option>
- <option value = "1" >Максимальная зарплата по вакансиям</option>
- <option value = "2" >Количество вакансий по кампаниям</option>
- <option value = "3" >Средняя зарплата по компаниям</option>
- </select><br>
-<label>Выберите тип графика:</label>
- <select id="charts2" onChange="getChart()">
- <option value = "line" selected>line</option>
- <option value = "area" >area</option>
- <option value = "column" >column</option>
- </select><br>
- <label>Количество вакансий на странице:</label>
- <select id="blacklist" onChange="countVacancies()">
-			<option value = "5" selected>5</option>
-			<option value = "10">10</option>
-			<option value = "20" >20</option>
-			<option value = "All" >Все</option>
-		</select>
-</div>
+</aside>
 <div class="list" id="list">
- <div class="holder"></div>
+<div class="holder"></div>
  
+</div>
 </div>
 <div style="clear: both;">
  <button type="button" class="buttonnavigation" id="prev" onclick="prevlist()">Предыдущая страница</button>
- <span id="index2" align="center">1</span>
+ <span id="index2" >1</span>
  <button type="button" class="buttonnavigation" id="next" onclick="nextlist();">Следующая страница</button>
 </div>
-</div>
+ </section>
 <footer>
-    <p>&copy; 2017 Alexander Mikheev.</p>
+    <p>&copy; 2017 Alexander Mikheev</p>
 </footer>
+</section>
 <script>
 $(document).ready(function() 
 {
-  getData();
+ $(".Downloadjson").hide();
+ var user = detect.parse(navigator.userAgent);
+ var bool1=(user.browser.family.indexOf('Chrome')) &&(parseInt(user.browser.version)>=14);
+ var bool2=(user.browser.family.indexOf('Opera')) &&(parseInt(user.browser.version)>=16);
+ var bool3=(user.browser.family.indexOf('Firefox')) &&(parseInt(user.browser.version)>=20);
+ if (bool1 || bool2|| bool3) $(".Downloadjson").show();
+ getData();
 });
+</script>
+<script>
+
 </script>
 
 </body>

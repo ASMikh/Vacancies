@@ -1,5 +1,6 @@
 ﻿var arr=[];//массив куда будем записывать данные при получении данных 
 var positiveArr=[];//массив для хранения обработанных данных(например, отфильтрованных)
+var urltest;
 function FilterVacancies()
  {
   $("#index2").html(1);
@@ -8,7 +9,8 @@ function FilterVacancies()
   getChart();
   initMap();
   countVacancies();
-  pagination(0,colVacancies);	 
+  pagination(0,colVacancies);	
+  DownloadData();    
  }
 function Filter()
  {
@@ -36,7 +38,6 @@ function Filter()
 	   if (parseInt(number.slice(2,3))<= $('#maxsalary').val()) bool2=true; else bool2=false;	
 	  } 
 	else  bool2=true;
-	//
 	 if ($('#Сompanylist').val().length>0)
 	  {
 	   if ($('#Сompanylist').val()=="All")bool3=true;
@@ -44,20 +45,19 @@ function Filter()
 	   if (x.indexOf($('#Сompanylist').val())>=0) bool3=true;
 	  }
 	 else bool3=true;
-	 if (checkBox.checked)
+	 if ($('#myonoffswitch').prop('checked'))
       {
-	   console.log("Yes");
-       var bl=true,bl1=true;
-	   if (number.slice(1,2)[0]) console.log("t1");else  bl=false;
-	   if (number.slice(2,3)[0]) console.log("t1");else  bl1=false;
-       bool4= bl || bl1;
+       var bool5=true,bool6=true;
+	   if (!number.slice(1,2)[0])   bool5=false;
+	   if (!number.slice(2,3)[0])   bool6=false;
+       bool4= bool5 && bool6;
       } else bool4=true;
-
     return bool && bool1 && bool2 && bool3 && bool4;
    });
 }
 function getData()//Функция получает Json данные и записывает в массив
 {
+ $('.list, .map, #chart').prepend("<div class='progress'></div>");//пока загружаем данные,показывавем Индикатор процесса
  $.getJSON(getUrl(), function(data) 
   { 
    for(var n=0; n<data.items.length; n++) 
@@ -101,6 +101,7 @@ function getData()//Функция получает Json данные и зап�
 	} 
    $("#index2").html(1);
    positiveArr=arr;
+   $('.progress').hide();
    generateListVacancies();
    getChart();
    initMap();
@@ -111,8 +112,7 @@ function getData()//Функция получает Json данные и зап�
   });
      
 }
-///////////////////////////////////////////////
-function Plotchart1(type)
+function Plot1(type)
 {
  var named=[],minrub=[]
  for(var i=0;i<positiveArr.length;i++)
@@ -122,10 +122,18 @@ function Plotchart1(type)
 	 named.push(positiveArr[i].slice(0,1));
 	 minrub.push(positiveArr[i].slice(1,2));
 	}
-  } 
-  Chart(named, minrub,type);	
+  }
+  var settings=
+	 {
+		 "type" :type,
+		 "title":'Минимальная зарплата по вакансиям',
+		 "subtitle":'Данные взяты с сайта hh.ru',
+		 "xAxisTitle":'Вакансии',
+		 "yAxisTitle":'Зарплата в рублях',
+	 }  
+  Chart(named, minrub,settings);	
 }
-function Plotchart2(type)
+function Plot2(type)
 {
  var named=[],maxrub=[];  
  for(var i=0;i<positiveArr.length;i++)
@@ -136,9 +144,17 @@ function Plotchart2(type)
 	 maxrub.push(positiveArr[i].slice(2,3));
 	}
   }
- Chart(named, maxrub,type);	 
+  var settings=
+	 {
+		 "type" :type,
+		 "title":'Максимальная зарплата по вакансиям',
+		 "subtitle":'Данные взяты с сайта hh.ru',
+		 "xAxisTitle":'Вакансии',
+		 "yAxisTitle":'Зарплата в рублях',
+	 }
+ Chart(named, maxrub,settings);	 
 }
-function Plotchart3(type)
+function Plot3(type)
 {
   var countvacancies=[];
   var companylist=getCompany();
@@ -153,42 +169,69 @@ function Plotchart3(type)
 	     }
        }
 	 }
-	Chart(companylist,countvacancies,type);	
+	 var settings=
+	 {
+		 "type" :type,
+		 "title":'Количество вакансий  по компаниям',
+		 "subtitle":'Данные взяты с сайта hh.ru',
+		 "xAxisTitle":'Компании',
+		 "yAxisTitle":'Количество вакансий',
+	 }
+	Chart(companylist,countvacancies,settings);	
 }
-function Plotchart4(type)
+function Plot4(type)
 {
 	 var countvacancies=[];
-	 let sum;
+	 var sum;
 	 var sumvacancies=[];
 	 var companylist=getCompany();
 	 for (var j=0;j<companylist.length;j++)
 	 {
-	  sumvacancies[j]=0;
       countvacancies[j]=0;
 	  sum=0;
 	  var x=0;
 	  for(var i=0;i<positiveArr.length;i++)
 	   { 
-        if ((positiveArr[i].slice(1,2)[0])&&(positiveArr[i].slice(4,5)[0]==companylist[j]))
+        if ((positiveArr[i].slice(1,2)[0])&&(!positiveArr[i].slice(2,3)[0])&&(positiveArr[i].slice(4,5)[0]==companylist[j]))
 	     {
 		  sum=sum+parseInt(positiveArr[i].slice(1,2)[0]);
           x++;
 	     }
-	    if ((positiveArr[i].slice(2,3)[0])&&(positiveArr[i].slice(4,5)[0]==companylist[j]))
+	    if ((positiveArr[i].slice(2,3)[0])&&(!positiveArr[i].slice(1,2)[0])&&(positiveArr[i].slice(4,5)[0]==companylist[j]))
 	     {
 		  sum=sum+parseInt(positiveArr[i].slice(2,3)[0]);
 		  x++;
 		 } 
+		 if ((positiveArr[i].slice(2,3)[0])&&(positiveArr[i].slice(1,2)[0])&&(positiveArr[i].slice(4,5)[0]==companylist[j]))
+	     {
+		  sum=sum+((parseInt(positiveArr[i].slice(2,3)[0])+parseInt(positiveArr[i].slice(1,2)[0]))/2);
+		  x++;
+		 } 
        }
-	  sumvacancies[j]=sum / x;
-	  if (x!=0) sumvacancies.push(sum/x);
-	  else sumvacancies.push(0);
+	  if (x!=0) sumvacancies.push([companylist[j],sum/x]);
+	  else sumvacancies.push([companylist[j],0]);
 	 }
-	 var company1= [].concat(companylist);
-	 Chart(company1,sumvacancies,type);	
+	 var summ=sumvacancies.filter(function(number)
+	 {
+		 if (number.slice(1,2)[0]!=0)  return number;
+	 });
+	 var xAxis=[];
+	 var yAxis=[];
+	 for(var i=0;i<summ.length;i++)
+	 {
+	  xAxis.push(summ[i].slice(0,1)[0]);
+	  yAxis.push(summ[i].slice(1,2)[0]);
+	 }
+	 var settings=
+	 {
+		 "type" :type,
+		 "title":'Средняя зарплата по компаниям',
+		 "subtitle":'Данные взяты с сайта hh.ru',
+		 "xAxisTitle":'Компании',
+		 "yAxisTitle":'Зарплата в рублях',
+	 }
+	 Chart(xAxis,yAxis,settings);	
 }
-
-///////////////////////////////////////////////
 //Функция подготавливает данные и строит график
 function getChart()
  {
@@ -196,10 +239,10 @@ function getChart()
   var type=$('#charts2').val();
   if ($('#charts').val().length>0)
    {
-    if ($('#charts').val()=="0") Plotchart1(type);
-    if ($('#charts').val()=="1") Plotchart2(type);
-    if ($('#charts').val()=="2") Plotchart3(type);
-    if ($('#charts').val()=="3") Plotchart4(type); 
+    if ($('#charts').val()=="0") Plot1(type);
+    if ($('#charts').val()=="1") Plot2(type);
+    if ($('#charts').val()=="2") Plot3(type);
+    if ($('#charts').val()=="3") Plot4(type); 
    }
   }
 //Функция формирует список вакансий на экране
@@ -231,7 +274,7 @@ function getUrl()
   var xhr = new XMLHttpRequest();
   xhr.open('GET', 'connect.json', true);
   xhr.send();
-  //если мы не получили ссылку из json по какой-то причине, то будем возвращать ссылку на сервис hh.ru
+  //если мы не получили ссылку из connect.json по какой-то причине, то будем возвращать ссылку по умолчанию. на сервис hh.ru
   if (xhr.status != 200) return 'https://api.hh.ru/vacancies?per_page=50&page=1&order_by=publication_time&area=43'; 
   else 
   {
@@ -248,13 +291,9 @@ function getUrl()
  {
   $("#index2").html(1);
   var sel = document.getElementById("blacklist"); // Получаем наш список
-  console.log(sel.options[sel.selectedIndex].value);
-  if (sel.options[sel.selectedIndex].value=="All")
-   {
-	colVacancies=positiveArr.length
-   }
+  if (sel.options[sel.selectedIndex].value=="All") colVacancies=positiveArr.length
   else
-  colVacancies = sel.options[sel.selectedIndex].value; // Получаем значение выделенного элемента (в нашем случае fruit2).
+  colVacancies = sel.options[sel.selectedIndex].value;
   pagination(0,colVacancies);	
  }
 function getCompany()
@@ -289,14 +328,16 @@ function unique(arr)
   return Object.keys(obj); // или собрать ключи перебором для IE8-
 }
 function DownloadData()
-{ var type = 'data:application/json;';
-  console.log(JSON.stringify(positiveArr));
-  var text = JSON.stringify(positiveArr);
-  var base = text;
-  var res = type + base;
-   console.log(res);
+{ 
+  var type = 'data:text/json;,';
+  var text = JSON.stringify(positiveArr).toString();
+  var base =text;
+  var res = type+base;
   document.getElementById('test').href = res;
 }
-
-
+function sleep(miliseconds) {
+   var currentTime = new Date().getTime();
+   while (currentTime + miliseconds >= new Date().getTime()) {
+   }
+}
  

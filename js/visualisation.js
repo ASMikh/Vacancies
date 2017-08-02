@@ -44,7 +44,7 @@ function addMarker(latLng, name, description)
       //для удобства используем массив description(в него загружаем данные из positiveArr (null заменяем на 'Не указано' )
 	  var description=[];
 	  for(var j=0;j<7;j++) if (positiveArr[i].slice(j,j+1)[0]) description.push(positiveArr[i].slice(j,j+1)[0]);else description.push('Не указано');
-	  if (description[5]==latLng.lat().toFixed(6) && description[6]==latLng.lng().toFixed(6)) contentString+='<h3>'+description[0]+'</h3>'+'<div>Зарплата: <b id=SalaryMin>'+description[1]+'</b> - <b id=SalaryMax>'+description[2]+'</b><div><div id="Company">Компания: '+description[3]+'</div><div id="Description">Обязанности: '+description[4]+'</div></div>'
+	  if (description[5]==latLng.lat().toFixed(6) && description[6]==latLng.lng().toFixed(6)) contentString+='<h3>'+description[0]+'</h3>'+'<div>Зарплата: <b id=SalaryMin>'+description[1]+'</b> - <b id=SalaryMax>'+description[2]+'</b><div><div id="Company">Компания: '+description[4]+'</div><div id="Description">Обязанности: '+description[3]+'</div></div>'
      }
     contentString+='</div>'
     // Меняем содержимое информационного окна
@@ -54,29 +54,15 @@ function addMarker(latLng, name, description)
    });
  }
  //функция построения графика
-function Chart(AxisX,AxisY,type)
+function Chart(AxisX,AxisY,setting)
  {
-  //delNulVal(AxisX,AxisY);
   Highcharts.chart('chart', { 
-  title:{text: 'График зарплат по вакансиям'}, 
-  subtitle : { text: 'Данные взяты с сайта hh.ru'},
+  title:{text: setting.title.toString()}, 
+  subtitle : { text: setting.subtitle.toString()},
   xAxis :{ categories: AxisX,
-   title:{ text: 'Список организаций'},},
-  yAxis :{title: {text: 'Зарплата в рублях'},
+   title:{ text: setting.xAxisTitle.toString()},},
+  yAxis :{title: {text: setting.yAxisTitle.toString()},
    plotLines: [{value: 0,width: 1,color: '#808080' }]
   },  
-  series:[{type: type.toString(),name: 'Минимальная зарплата',data: AxisY}]
+  series:[{type: setting.type.toString(),name: setting.yAxisTitle.toString(),data: AxisY}]
  });}
- function delNulVal(massiv1,massiv2)
-{
- var x=massiv2.length;
- for(var i=0;i<x;i++)
-  {	
-   if (isNaN(massiv2[i]))
-	{
-	  massiv1.splice(i, 1);
-	  massiv2.splice(i, 1);
-	  //i--;
-	}
-  }
-}
